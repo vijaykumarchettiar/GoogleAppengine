@@ -19,7 +19,6 @@ import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.http.javanet.NetHttpTransport;
-
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 import java.io.File;
@@ -51,7 +50,9 @@ public class AuthUtil {
   /**
    * Creates and returns a new {@link AuthorizationCodeFlow} for this app.
    */
-  public static AuthorizationCodeFlow newAuthorizationCodeFlow() throws IOException {
+  
+@SuppressWarnings("deprecation")
+public static AuthorizationCodeFlow newAuthorizationCodeFlow() throws IOException {
     URL resource = AuthUtil.class.getResource("/oauth.properties");
     File propertiesFile = new File("./src/main/resources/oauth.properties");
     try {
@@ -67,10 +68,11 @@ public class AuthUtil {
 
     String clientId = authProperties.getProperty("client_id");
     String clientSecret = authProperties.getProperty("client_secret");
-
+   
     return new GoogleAuthorizationCodeFlow.Builder(new NetHttpTransport(), new JacksonFactory(),
         clientId, clientSecret, Collections.singleton(GLASS_SCOPE)).setAccessType("offline")
         .setCredentialStore(store).build();
+    
   }
 
   /**
