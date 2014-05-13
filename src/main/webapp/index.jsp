@@ -25,8 +25,6 @@ limitations under the License.
 <%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!doctype html>
 <%
   String userId = com.google.glassware.AuthUtil.getUserId(request);
   String appBaseUrl = WebUtil.buildUrl(request, "/");
@@ -168,7 +166,7 @@ limitations under the License.
       <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
         <input type="hidden" name="operation" value="insertItem">
         <textarea class="span4" name="message">Hello World!</textarea><br/>
-        <button class="btn btn-block" type="submit">
+	 <button class="btn btn-block" type="submit">
           Insert the above message
         </button>
       </form>

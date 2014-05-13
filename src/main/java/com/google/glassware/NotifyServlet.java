@@ -29,6 +29,7 @@ import com.google.common.collect.Lists;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
 import java.util.logging.Logger;
@@ -44,7 +45,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jenny Murphy - http://google.com/+JennyMurphy
  */
-@SuppressWarnings("serial")
 public class NotifyServlet extends HttpServlet {
   private static final Logger LOG = Logger.getLogger(NotifyServlet.class.getSimpleName());
 

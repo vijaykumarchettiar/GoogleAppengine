@@ -44,7 +44,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jenny Murphy - http://google.com/+JennyMurphy
  */
-@SuppressWarnings("serial")
 public class MainServlet extends HttpServlet {
 
   /**

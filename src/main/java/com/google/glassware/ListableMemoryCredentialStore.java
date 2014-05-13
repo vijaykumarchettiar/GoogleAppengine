@@ -18,6 +18,7 @@ package com.google.glassware;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.auth.oauth2.CredentialStore;
 
+
 import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -29,7 +30,6 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @author Jenny Murphy - http://google.com/+JennyMurphy
  */
-@SuppressWarnings("deprecation")
 public class ListableMemoryCredentialStore implements CredentialStore {
 
   /**

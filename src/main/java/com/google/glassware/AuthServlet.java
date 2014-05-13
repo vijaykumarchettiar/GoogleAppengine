@@ -32,7 +32,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jenny Murphy - http://google.com/+JennyMurphy
  */
-@SuppressWarnings("serial")
 public class AuthServlet extends HttpServlet {
   private static final Logger LOG = Logger.getLogger(AuthServlet.class.getSimpleName());
 
@@ -56,7 +55,7 @@ public class AuthServlet extends HttpServlet {
               .setRedirectUri(WebUtil.buildUrl(req, "/oauth2callback")).execute();
 
       // Extract the Google User ID from the ID token in the auth response
-      String userId = ((GoogleTokenResponse) tokenResponse).parseIdToken().getPayload().getSubject();
+      String userId = ((GoogleTokenResponse) tokenResponse).parseIdToken().getPayload().getUserId();
 
       LOG.info("Code exchange worked. User " + userId + " logged in.");
 
