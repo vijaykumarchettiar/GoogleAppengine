@@ -109,6 +109,13 @@ limitations under the License.
     <artifactId>appengine-api-stubs</artifactId>
     <version>1.9.4</version>
     </dependency> 
+
+<dependency>
+    <groupId>com.google.appengine</groupId>
+    <artifactId>appengine-api-1.0-sdk</artifactId>
+    <version>1.9.4</version>
+    </dependency> 
+
 <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
