@@ -39,6 +39,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.*;
+import java.sql.*;
+import javax.servlet.http.*;
+
 /**
  * Handles POST requests from index.jsp
  *
@@ -90,6 +94,7 @@ public class MainServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
+
     String userId = AuthUtil.getUserId(req);
     Credential credential = AuthUtil.newAuthorizationCodeFlow().loadCredential(userId);
     String message = "";
@@ -119,8 +124,30 @@ public class MainServlet extends HttpServlet {
       TimelineItem timelineItem = new TimelineItem();
 
       if (req.getParameter("message") != null) {
-        timelineItem.setText(req.getParameter("message"));
-      }
+           String s = req.getParameter("loc");
+	String res[] = s.split("~");		
+	String head = req.getParameter("message");
+	String spot = 'text": "head",
+        "location": {
+            "kind": "mirror#location",
+            "latitude": res[2],
+            "longitude": res[3],
+            "displayName": "head",
+            "icon": "http://storage.googleapis.com/third_shade_267/res[1]"
+	    "address": "res[0]"
+        }';
+       
+
+//	timelineItem.setText(spot);
+	timelineItem.setHtml(spot);
+     	 List<MenuItem> menuItemList = new ArrayList<MenuItem>();
+      // Built in actions
+      menuItemList.add(new MenuItem().setAction("NAVIGATE"));
+      menuItemList.add(new MenuItem().setAction("REPLY"));
+      menuItemList.add(new MenuItem().setAction("DELETE"));
+	 timelineItem.setMenuItems(menuItemList); 
+MirrorClient.insertTimelineItem(credential, timelineItem);
+	}
 
       // Triggers an audible tone when the timeline item is received
       timelineItem.setNotification(new NotificationConfig().setLevel("DEFAULT"));

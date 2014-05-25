@@ -23,8 +23,12 @@ limitations under the License.
 <%@ page import="com.google.api.services.mirror.model.Attachment" %>
 <%@ page import="com.google.glassware.MainServlet" %>
 <%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
-
+<%@ page import="java.sql.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page import="com.google.appengine.api.utils.SystemProperty" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%
   String userId = com.google.glassware.AuthUtil.getUserId(request);
   String appBaseUrl = WebUtil.buildUrl(request, "/");
@@ -166,6 +170,42 @@ limitations under the License.
       <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
         <input type="hidden" name="operation" value="insertItem">
         <textarea class="span4" name="message">Hello World!</textarea><br/>
+         Select Location: <select name="loc"><option value=''>-Select Location-</option>
+
+<%
+String url = null;
+if (SystemProperty.environment.value() ==
+    SystemProperty.Environment.Value.Production) {
+  // Load the class that provides the new "jdbc:google:mysql://" prefix.
+  Class.forName("com.mysql.jdbc.GoogleDriver");
+  url = "jdbc:google:mysql://third-shade-267:cartogramdb/cartogramdb?user=root";
+} else {
+  // Local MySQL instance to use during development.
+  Class.forName("com.mysql.jdbc.Driver");
+  url = "jdbc:google:myql://third-shade-267:cartogramdb/cartogramdb?user=root";
+}
+
+Connection conn = DriverManager.getConnection(url);
+ResultSet rs = conn.createStatement().executeQuery(
+    "SELECT * FROM savemapimage");
+%>
+<%
+while (rs.next()) {
+    String iname = rs.getString("iname");
+    String imgurl = rs.getString("url");
+    double lat   = rs.getDouble("lat");
+    double lng  = rs.getDouble("lng"); 
+	int id = rs.getInt("image_id");
+ %>
+	
+<option value="<%= iname %>~<%= imgurl %>~<%= lat %>~<%= lng %>"><%= iname %></option>	
+
+<%
+}
+conn.close();
+%>
+
+</select>
 	 <button class="btn btn-block" type="submit">
           Insert the above message
         </button>
