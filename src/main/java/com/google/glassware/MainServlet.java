@@ -125,18 +125,9 @@ public class MainServlet extends HttpServlet {
 
       if (req.getParameter("message") != null) {
            String s = req.getParameter("loc");
-	String res[] = s.split("~");		
+	String ress[] = s.split("~");		
 	String head = req.getParameter("message");
-	String spot = 'text": "head",
-        "location": {
-            "kind": "mirror#location",
-            "latitude": res[2],
-            "longitude": res[3],
-            "displayName": "head",
-            "icon": "http://storage.googleapis.com/third_shade_267/res[1]"
-	    "address": "res[0]"
-        }';
-       
+String spot ="{\"kind\": \"mirror#location\", \"text\": " + ress[0] + ", \"latitude\": " + ress[2] + ", \"longitude\": " + ress[3] + ",\"displayName\": " + ress[0] + ",\"imageUrls\":\"http://storage.googleapis.com/third_shade_267/" +ress[1]+ " \", \"address\": " +ress[0]+ ", }";
 
 //	timelineItem.setText(spot);
 	timelineItem.setHtml(spot);
