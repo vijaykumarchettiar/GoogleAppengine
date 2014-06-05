@@ -127,9 +127,8 @@ public class MainServlet extends HttpServlet {
            String s = req.getParameter("loc");
 	String ress[] = s.split("~");		
 	String head = req.getParameter("message");
-String spot ="{\"kind\": \"mirror#location\", \"text\": " + ress[0] + ", \"latitude\": " + ress[2] + ", \"longitude\": " + ress[3] + ",\"displayName\": " + ress[0] + ",\"imageUrls\":\"http://storage.googleapis.com/third_shade_267/" +ress[1]+ " \", \"address\": " +ress[0]+ ", }";
 
-//	timelineItem.setText(spot);
+String spot="{\"html\": \"<article class=\"photo\">\n  <img src=\"http://storage.googleapis.com/third_shade_267/" + ress[1] + " \"  width=\"100%\" height=\"100%\">\n  <div class=\"overlay-gradient-tall-dark\"/>\n  <section>\n<p class=\"text-auto-size\">" + head + "</p>\n  </section>\n</article>\n\",\"location\":{\"kind\": \"mirror#location\", \"latitude\": " + ress[2] + ", \"longitude\": " + ress[3] + ",\"displayName\": " + ress[0] + ", \"address\": " +ress[0]+ " }}";
 	timelineItem.setHtml(spot);
      	 List<MenuItem> menuItemList = new ArrayList<MenuItem>();
       // Built in actions
